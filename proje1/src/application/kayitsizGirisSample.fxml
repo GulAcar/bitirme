@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane  prefHeight="423.0" prefWidth="451.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="kayitsizGirisSampleController"> 
+   <children>
+      <ImageView fx:id="qrviewv" fitHeight="150.0" fitWidth="200.0" layoutX="26.0" layoutY="36.0" pickOnBounds="true" preserveRatio="true" />
+      <Label fx:id="urunAdi" layoutX="315.0" layoutY="36.0" prefHeight="17.0" prefWidth="68.0" text="Label" />
+      <Label fx:id="marka" layoutX="315.0" layoutY="77.0" prefHeight="17.0" prefWidth="68.0" text="Label" />
+      <Label fx:id="sonTT" layoutX="315.0" layoutY="111.0" prefHeight="17.0" prefWidth="68.0" text="Label" />
+      <Label fx:id="enKal" layoutX="315.0" layoutY="144.0" prefHeight="17.0" prefWidth="68.0" text="Label" />
+      <Label fx:id="icindekiler" layoutX="315.0" layoutY="212.0" prefHeight="17.0" prefWidth="68.0" text="Label" />
+      <Label fx:id="uretimyer" layoutX="315.0" layoutY="178.0" prefHeight="17.0" prefWidth="68.0" text="Label" />
+      <Button fx:id="qrOku" layoutX="26.0" layoutY="217.0" mnemonicParsing="false" onAction="#qrOku_click" prefHeight="25.0" prefWidth="93.0" text="QR Oku" />
+      <Button fx:id="dil" layoutX="26.0" layoutY="268.0" mnemonicParsing="false" onAction="#dil_click" prefHeight="25.0" prefWidth="93.0" text="EN" />
+   </children>
+</AnchorPane>
