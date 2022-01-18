@@ -72,6 +72,31 @@ public class KayitOlSampleController {
   
   @FXML
   private Button dil;
+  
+  @FXML
+  private Button geri;
+  
+  @FXML
+  void geri_click(ActionEvent event) {
+	  
+	  try {
+  		
+	    	
+  		FXMLLoader loader=new FXMLLoader(getClass().getResource("projeSample.fxml"));
+			AnchorPane pane2 = (AnchorPane)loader.load();
+			ProjeControllerClassName nesne=loader.getController();
+			Scene scene2=new Scene(pane2);
+			Stage stage2=new Stage();
+			stage2.setScene(scene2);
+          Stage primaryStage = (Stage)geri.getScene().getWindow();
+          primaryStage.hide();
+
+			stage2.show();
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+
+  }
 
   int i =0;
   @FXML

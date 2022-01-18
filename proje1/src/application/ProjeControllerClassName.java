@@ -90,11 +90,35 @@ public class ProjeControllerClassName {
     
     	String sql="select*from login where kul_ad=? and sifre=?";
     	VeritabaniUtil dbUtil=new VeritabaniUtil();
-    	if(dbUtil.validate(txt_kul.getText(),txt_sifre.getText()))
+    	
+    	if(txt_sifre.getText().equals("admin") &&
+    	        txt_kul.getText().equals("admin")) {
+    		
+    		try {
+        		
+    	    	
+        		FXMLLoader adminloader=new FXMLLoader(getClass().getResource("admin.fxml"));
+    			AnchorPane adminpane = (AnchorPane)adminloader.load();
+    			adminController nesne=adminloader.getController();
+    			Scene scene2=new Scene(adminpane);
+    			Stage stage2=new Stage();
+    			stage2.setScene(scene2);
+                Stage primaryStage = (Stage)giris_btn.getScene().getWindow();
+                primaryStage.hide();
+
+    			stage2.show();
+    		} catch(Exception e) {
+    			e.printStackTrace();
+    		}
+    		
+    	}
+    	
+    	else if(dbUtil.validate(txt_kul.getText(),txt_sifre.getText()))
     	{
     		
     	try {
     		
+    	
     		FXMLLoader loader=new FXMLLoader(getClass().getResource("KullaniciGirisiSample.fxml"));
 			AnchorPane pane2 = (AnchorPane)loader.load();
 			KullaniciGirisiSampleController nesne=loader.getController();
@@ -110,6 +134,7 @@ public class ProjeControllerClassName {
 		}
     }
     	
+    	
     	else {
     		Alert alert=new Alert(AlertType.INFORMATION);
     		alert.setTitle("sayfa giriþ");
@@ -123,15 +148,15 @@ public class ProjeControllerClassName {
     @FXML
     void kayitol_btn_click(ActionEvent event) {
     //dýs form olusturma	
-    	try {
+    	/*try {
 			AnchorPane pane1 = (AnchorPane)FXMLLoader.load(getClass().getResource("KayitOlSample.fxml"));
 			Scene scene = new Scene(pane1,400,400);
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			
 		} catch(Exception e) {
 			e.printStackTrace();
-		}
-	Stage stage1=new Stage();
+		}*/
+	//Stage stage1=new Stage();
 
    
     
@@ -145,6 +170,8 @@ public class ProjeControllerClassName {
 		
 		Stage stage2=new Stage();
 		stage2.setScene(scene2);
+		Stage primaryStage = (Stage)giris_btn.getScene().getWindow();
+        primaryStage.hide();
 		stage2.show();
 	} catch(Exception e) {
 		e.printStackTrace();
@@ -157,17 +184,29 @@ public class ProjeControllerClassName {
     @FXML
     void kayitolma_btn_click(ActionEvent event) {
     	
-    	try {
-    		FXMLLoader loader=new FXMLLoader(getClass().getResource("kayitsizGirisSample.fxml"));
-			AnchorPane pane2 = (AnchorPane)loader.load();
-			kayitsizGirisSampleController nesne=loader.getController();
-			Scene scene2=new Scene(pane2);
+    	/*try {
+			AnchorPane pane1 = (AnchorPane)FXMLLoader.load(getClass().getResource("KayitsizGirisSample.fxml"));
+			Scene scene = new Scene(pane1,400,400);
+			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			
-			Stage stage2=new Stage();
-			stage2.setScene(scene2);
-			stage2.show();
 		} catch(Exception e) {
 			e.printStackTrace();
+		}
+	Stage stage1=new Stage();*/
+
+	try {
+		FXMLLoader loader=new FXMLLoader(getClass().getResource("KayitsizGirisSample.fxml"));
+		AnchorPane pane2 = (AnchorPane)loader.load();
+		kayitsizGirisSampleController nesne=loader.getController();
+		Scene scene2=new Scene(pane2);
+		
+		Stage stage2=new Stage();
+		stage2.setScene(scene2);
+		 Stage primaryStage = (Stage)kayitolma_btn.getScene().getWindow();
+         primaryStage.hide();
+		stage2.show();
+	} catch(Exception e) {
+		e.printStackTrace();
 		}
 
     }

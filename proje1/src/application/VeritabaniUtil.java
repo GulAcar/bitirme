@@ -9,7 +9,7 @@ public class VeritabaniUtil {
     private static final String DATABASE_PASSWORD = "root";
     private static final String SELECT_QUERY = "SELECT * FROM kullanýcýlar WHERE KullaniciAdi = ? and Sifre = ?";
     private static final String INSERT_QUERY= "insert into kullanýcýlar(Ad,soyad,kullaniciAdi,sifre,dil) values (?,?,?,?,?)";
-    private static final String hangiUrun_QUERY= "SELECT * FROM yiyeceklerinozellikleri WHERE ID =";
+    private static final String hangiUrun_QUERY= "SELECT * FROM gida WHERE ID =";
     
     public boolean validate(String emailId, String password) throws SQLException {
 
@@ -82,32 +82,31 @@ public class VeritabaniUtil {
         }
     }
 
-    public static boolean dbInsertGida( String urunadi,String marka,Date sonTT,int miktar,int enerji,String saklamakosullari,String üretimyeri,String icindekiler) {
+    public static boolean dbInsertGida( String urunadi,String marka,int miktar,int enerji,String saklamakosullari,String üretimyeri,String icindekiler) {
     	 try { 
     	Connection conn = DriverManager.getConnection(DATABASE_URL,DATABASE_USERNAME,DATABASE_PASSWORD); 
         Statement st = conn.createStatement(); 
-        st.executeUpdate("INSERT INTO gida (urunadi,marka,sonTT,miktar,enerji,saklamakosullari,uretimyeri,icindekiler)" + 
-            "VALUES ("+urunadi+","+marka+","+sonTT+
-            ","+miktar+","+enerji+","+saklamakosullari+","+üretimyeri+","+icindekiler+")"); 
+        st.executeUpdate("INSERT INTO gida (urunadi,marka,miktar,enerji,saklamakosullari,uretimyeri,icindekiler)" + 
+            " VALUES ('"+urunadi+"','"+marka+"','"+miktar+"','"+enerji+"','"+saklamakosullari+"','"+üretimyeri+"','"+icindekiler+"')"); 
         conn.close(); 
         return true;
     } catch (Exception e) { 
-        System.err.println("Got an exception! "); 
+        System.err.println("Gida eklerken hata"+ e); 
         return false;
     }
     	 }
     
-    public static boolean dbInsertBakimTemizlik(String  urunadi,String marka,Date sonTT,int miktar,String saklamakosullari,String uyarilar,String icindekiler) {
+    public static boolean dbInsertBakimTemizlik(String  urunadi,String marka,int miktar,String saklamakosullari,String uyarilar,String icindekiler) {
    	 try { 
     	Connection conn = DriverManager.getConnection(DATABASE_URL,DATABASE_USERNAME,DATABASE_PASSWORD); 
         Statement st = conn.createStatement(); 
-        st.executeUpdate("INSERT INTO bakimtemizlik (urnadi,marka,sonTT,miktar,saklamakosullari,uyarilar,icindekiler)" + 
-            "VALUES ("+urunadi+","+marka+","+sonTT+
-            ","+miktar+","+saklamakosullari+","+uyarilar+","+icindekiler+")"); 
+        st.executeUpdate("INSERT INTO bakimtemizlik (urunadi,marka,miktar,saklamakosullari,uyarilar,icindekiler)" + 
+            " VALUES ('"+urunadi+"','"+marka+
+            "','"+miktar+"','"+saklamakosullari+"','"+uyarilar+"','"+icindekiler+"')"); 
         conn.close(); 
         return true;
     } catch (Exception e) { 
-        System.err.println("Got an exception! "); 
+        System.err.println("bakim eklerken hata "+ e); 
         return false;
     }
    	 

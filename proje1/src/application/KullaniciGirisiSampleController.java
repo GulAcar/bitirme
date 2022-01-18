@@ -26,9 +26,14 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -54,9 +59,6 @@ public class KullaniciGirisiSampleController {
     private Label marka;
 
     @FXML
-    private Label sonTT;
-
-    @FXML
     private Label enKal;
 
     @FXML
@@ -77,16 +79,40 @@ public class KullaniciGirisiSampleController {
     @FXML
     private Button dil;
     
+    @FXML
+    private Button geri;
+    
+    @FXML
+    void geri_click(ActionEvent event) {
+    	
+    	System.out.println("calýstý");
+    	try {
+    		FXMLLoader loader=new FXMLLoader(getClass().getResource("projeSample.fxml"));
+    		AnchorPane pane2 = (AnchorPane)loader.load();
+    		ProjeControllerClassName nesne=loader.getController();
+    		Scene scene2=new Scene(pane2);
+    		
+    		Stage stage2=new Stage();
+    		stage2.setScene(scene2);
+    		Stage primaryStage = (Stage)geri.getScene().getWindow();
+            primaryStage.hide();
+
+    		stage2.show();
+    	} catch(Exception e) {
+    		e.printStackTrace();
+    		}
+
+    }
+    
     int i =0;
     @FXML
-    void dil_click(ActionEvent event) {
+    void dil_click(ActionEvent event) throws IOException {
     	System.out.print(i);
   	  if(i==0) {
   		  //Turkcesi Buraya
-  		  urunAdi.setText("Ürün Adý");
+  		  urunAdi.setText("Urun adi");
   		  marka.setText("Marka");
-  		  sonTT.setText("Kullanici Adý");
-  		  enKal.setText("enerji/kalori");
+  		  enKal.setText("Enerji/Kalori");
   		  uretimyer.setText("Üretim Yeri");
   		  saklamakos.setText("Saklama Koþullarý");
   		  icindekiler.setText("Ýçindekiler");
@@ -94,13 +120,11 @@ public class KullaniciGirisiSampleController {
   		  qrOku.setText("QROku");
   		  dil.setText("EN");
   		  i=1;
-  		  
-  	  }
+  		}
   	  else if(i==1) {
   		  //Ingilizcesi buraya
-  		urunAdi.setText("Name of the product");
+  		  urunAdi.setText("Name of the product");
 		  marka.setText("Brand");
-		  sonTT.setText("User name");
 		  enKal.setText("energy/calories");
 		  uretimyer.setText("Production place");
 		  saklamakos.setText("Storage Conditions");
@@ -119,7 +143,9 @@ public class KullaniciGirisiSampleController {
     private static final String DATABASE_URL = "jdbc:mysql://localhost:3306/bprojesi";
     private static final String DATABASE_USERNAME = "root";
     private static final String DATABASE_PASSWORD = "root";
-    private static final String hangiUrun_QUERY= "SELECT * FROM yiyeceklerinozellikleri WHERE ID =";
+    private static final String GIDA_QUERY= "SELECT * FROM gida WHERE urunadi ='";
+    private static final String BAKIM_QUERY= "SELECT * FROM bakimtemizlik WHERE urunadi ='";
+
 	
 
     @FXML
@@ -139,27 +165,71 @@ public class KullaniciGirisiSampleController {
             if(decodedText == null) {
             	System.out.println("donusturulemedi");
             } else {
+            	Pattern gida_pattern = Pattern.compile("gida_", Pattern.CASE_INSENSITIVE);
+                Matcher gida_matcher = gida_pattern.matcher(decodedText);
+            	if(gida_matcher.find()) {
+            		String islenmis=decodedText.substring(5);
+            		
+            		// Open a connection
+            		try(Connection conn = DriverManager.getConnection(DATABASE_URL, DATABASE_USERNAME, DATABASE_PASSWORD);
+                            Statement stmt = conn.createStatement();
+                            ResultSet rs = stmt.executeQuery(GIDA_QUERY+islenmis+"'");
+                         ) {		      
+                            while(rs.next()){
+                            	if(i==0) {
+                         			   urunAdi.setText("Urun adi: "+rs.getString("urunadi"));
+                         			   marka.setText("Urunun markasi: "+rs.getString("marka"));
+                         			   miktar.setText("miktarý: "+rs.getString("miktar"));
+                         			   enKal.setText("Urunun Kalorisi(100gr): "+rs.getInt("enerji")+" cal "+ (rs.getInt("enerji"))*4.14+" joule");
+                         			   icindekiler.setText("Urunun icerigi: "+rs.getString("icindekiler") );
+                         			   saklamakos.setText("saklama kosullari: "+rs.getString("saklamakosullari"));
+                         			   uretimyer.setText("Urunun uretim yeri: "+rs.getString("uretimyeri"));
+                         			   }
+                            	if(i==1)
+                            	{
+                            		
+                            			urunAdi.setText("Urun adi: "+Api.translate("tr", "en", rs.getString("urunadi")));
+                            			marka.setText("Urunun markasi: "+rs.getString("marka"));
+                            			miktar.setText("miktarý: "+rs.getString("miktar"));
+                            			enKal.setText("Urunun Kalorisi(100gr): "+rs.getInt("enerji")+" cal "+ (rs.getInt("enerji"))*4.14+" joule");
+                            			icindekiler.setText("Urunun icerigi: "+rs.getString("icindekiler") );
+                            			saklamakos.setText("saklama kosullari: "+rs.getString("saklamakosullari"));
+                            			uretimyer.setText("Urunun uretim yeri: "+rs.getString("uretimyeri"));
+                      			   	
+                            	}
+                            	
+                            };
+                            
+                            
+                         } catch (SQLException e) {
+                            e.printStackTrace();
+                         }
+            	}  
+            	Pattern bakim_pattern = Pattern.compile("bakim_", Pattern.CASE_INSENSITIVE);
+                Matcher bakim_matcher = bakim_pattern.matcher(decodedText);
+            	if(bakim_matcher.find()) {
+            		String islenmis=decodedText.substring(6);
             	
-            	// Open a connection
-                try(Connection conn = DriverManager.getConnection(DATABASE_URL, DATABASE_USERNAME, DATABASE_PASSWORD);
-                   Statement stmt = conn.createStatement();
-                   ResultSet rs = stmt.executeQuery(hangiUrun_QUERY+decodedText);
-                ) {		      
-                   while(rs.next()){
-                			   urunAdi.setText("Urun adi: "+rs.getString("urunadi"));
-                			   marka.setText("Urunun markasi: "+rs.getString("marka"));
-                			   miktar.setText("miktarý: "+rs.getString("miktar"));
-                			   sonTT.setText("Urunun Son Kullanma Tarihi: "+rs.getString("sonTT"));
-                			   enKal.setText("Urunun Kalorisi(100gr): "+rs.getInt("enerji/kalori")+" cal "+ (rs.getInt("enerji/kalori"))*4.14+" joule");
-                			   icindekiler.setText("Urunun icerigi: "+rs.getString("icindekiler") );
-                			   saklamakos.setText("saklama kosullari: "+rs.getString("saklamakosullari"));
-                			   uretimyer.setText("Urunun uretim yeri: "+rs.getString("uretimyeri"));
-                			   };
-                   
-                   
-                } catch (SQLException e) {
-                   e.printStackTrace();
-                }
+            		try(Connection conn = DriverManager.getConnection(DATABASE_URL, DATABASE_USERNAME, DATABASE_PASSWORD);
+                            Statement stmt = conn.createStatement();
+                            ResultSet rs = stmt.executeQuery(BAKIM_QUERY+islenmis+"'");
+                         ) {		      
+                            while(rs.next()){
+                         			   urunAdi.setText("Urun adi: "+rs.getString("urunadi"));
+                         			   marka.setText("Urunun markasi: "+rs.getString("marka"));
+                         			   miktar.setText("miktarý: "+rs.getString("miktar"));
+                         			   icindekiler.setText("Urunun icerigi: "+rs.getString("icindekiler") );
+                         			   saklamakos.setText("saklama kosullari: "+rs.getString("saklamakosullari"));
+                         			   lbl_uyarilar.setText("uyarýlar:"+rs.getString("uyarýlar"));
+                         			   };
+                            
+                            
+                         } catch (SQLException e) {
+                            e.printStackTrace();
+                         }
+            	}
+            	
+                
         		
             }
         } catch (IOException e) {

@@ -27,6 +27,7 @@
       <Button fx:id="btn_kayitOl" layoutX="282.0" layoutY="372.0" mnemonicParsing="false" onAction="#btn_kayitOl_Action" prefHeight="25.0" prefWidth="124.0" style="-fx-background-color: lightsteelblue;" text="Kayıt Ol" />
       <Label fx:id="lbl_Soyad" layoutX="57.0" layoutY="138.0" text="Soyad" />
       <TextField fx:id="txt_Soyad" layoutX="185.0" layoutY="134.0" />
-      <Button fx:id="dil" layoutX="57.0" layoutY="336.0" mnemonicParsing="false" onAction="#dil_click" prefHeight="25.0" prefWidth="65.0" text="Dil" />
+      <Button fx:id="dil" layoutX="57.0" layoutY="336.0" mnemonicParsing="false" onAction="#dil_click" prefHeight="25.0" prefWidth="65.0" style="-fx-background-color: lavender;" text="Dil" />
+      <Button fx:id="geri" layoutX="57.0" layoutY="379.0" mnemonicParsing="false" onAction="#geri_click" prefHeight="25.0" prefWidth="65.0" style="-fx-background-color: lavender;" text="Geri" />
    </children>
 </AnchorPane>

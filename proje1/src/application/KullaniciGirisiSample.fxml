@@ -9,14 +9,15 @@
    <children>
       <ImageView fx:id="qr_view" fitHeight="172.0" fitWidth="200.0" layoutX="24.0" layoutY="33.0" pickOnBounds="true" preserveRatio="true" />
       <Button fx:id="qrOku" layoutX="24.0" layoutY="226.0" mnemonicParsing="false" onAction="#qrOku_click" prefHeight="25.0" prefWidth="85.0" style="-fx-background-color: mistyrose;" text="QROku" />
-      <Label fx:id="urunAdi" alignment="TOP_LEFT" layoutX="257.0" layoutY="16.0" prefHeight="25.0" prefWidth="282.0" text="urunAdi" wrapText="true" />
-      <Label fx:id="marka" layoutX="257.0" layoutY="49.0" prefHeight="25.0" prefWidth="282.0" text="marka" />
-      <Label fx:id="sonTT" alignment="TOP_LEFT" layoutX="257.0" layoutY="85.0" prefHeight="25.0" prefWidth="282.0" text="sonTT" wrapText="true" />
-      <Label fx:id="enKal" alignment="TOP_LEFT" layoutX="257.0" layoutY="159.0" prefHeight="25.0" prefWidth="282.0" text="enerji/kalori" wrapText="true" />
-      <Label fx:id="icindekiler" alignment="TOP_LEFT" layoutX="257.0" layoutY="269.0" prefHeight="117.0" prefWidth="282.0" text="icindekiler" wrapText="true" />
-      <Label fx:id="saklamakos" alignment="TOP_LEFT" layoutX="257.0" layoutY="226.0" prefHeight="34.0" prefWidth="282.0" text="saklama koşulları" wrapText="true" />
-      <Label fx:id="miktar" layoutX="257.0" layoutY="119.0" prefHeight="25.0" prefWidth="282.0" text="miktar" />
+      <Label fx:id="urunAdi" alignment="TOP_LEFT" layoutX="257.0" layoutY="16.0" prefHeight="25.0" prefWidth="282.0" text="Ürün Adı" wrapText="true" />
+      <Label fx:id="marka" layoutX="257.0" layoutY="49.0" prefHeight="25.0" prefWidth="282.0" text="Marka" />
+      <Label fx:id="enKal" alignment="TOP_LEFT" layoutX="257.0" layoutY="99.0" prefHeight="25.0" prefWidth="282.0" text="Enerji/Kalori" wrapText="true" />
+      <Label fx:id="icindekiler" alignment="TOP_LEFT" layoutX="257.0" layoutY="269.0" prefHeight="117.0" prefWidth="282.0" text="İçindekiler" wrapText="true" />
+      <Label fx:id="saklamakos" alignment="TOP_LEFT" layoutX="257.0" layoutY="209.0" prefHeight="42.0" prefWidth="282.0" text="Saklama Koşulları" wrapText="true" />
+      <Label fx:id="miktar" layoutX="257.0" layoutY="74.0" prefHeight="25.0" prefWidth="282.0" text="Miktar" />
       <Button fx:id="dil" layoutX="24.0" layoutY="269.0" mnemonicParsing="false" onAction="#dil_click" prefHeight="25.0" prefWidth="85.0" style="-fx-background-color: mistyrose;" text="Çevir" />
-      <Label fx:id="lbl_uyarilar" layoutX="257.0" layoutY="192.0" prefHeight="25.0" prefWidth="282.0" text="Uyarılar" />
+      <Label fx:id="lbl_uyarilar" alignment="TOP_LEFT" layoutX="257.0" layoutY="163.0" prefHeight="42.0" prefWidth="282.0" text="Uyarılar" />
+      <Button fx:id="geri" layoutX="24.0" layoutY="328.0" mnemonicParsing="false" onAction="#geri_click" prefHeight="25.0" prefWidth="85.0" style="-fx-background-color: mistyrose;" text="Geri" />
+      <Label fx:id="uretimyer" alignment="TOP_LEFT" layoutX="257.0" layoutY="134.0" prefHeight="17.0" prefWidth="282.0" text="Üretim Yeri" />
    </children>
 </AnchorPane>
